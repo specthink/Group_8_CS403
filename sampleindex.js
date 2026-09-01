@@ -26,7 +26,7 @@ app.get('/students', (req, res) => {
     res.status(200).json(students);
 });
 
-app.put('/students/id:', (req, res) => {
+app.put('/students/:id:', (req, res) => {
     const studentId = parseInt(req.params.id);
     const name = req.body.name
     const course = req.body.course
@@ -40,12 +40,27 @@ app.put('/students/id:', (req, res) => {
     }
 });
 
-app.patch('/students', (req, res) => {
-    
+app.patch('/students/:id', (req, res) => {
+    const student = students.find(s => s.id === studentId)
+
+    if (student){
+        if (req.body.name !== undefined) student.name = req.body.name
+        if (req.body.course !== undefined) student.course = req.body.course
+
+        res.status(200).json(student)
+        res.status(404).json({ message: "Student not found"})
+    }
 });
 
-app.delete('/students', (req, res) => {
+app.delete('/students/:id', (req, res) => {
+    const studentToDelete = students[index]
 
+    students.splice(index, 1)
+
+    res.status(200).json({
+        message: "Student deleted successfully",
+        student: studentToDelete
+    })
 });
 
 app.listen(3000, () => {
