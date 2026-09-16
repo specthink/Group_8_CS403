@@ -1,7 +1,7 @@
 const app = require("./src/app");
 const pool = require("./src/config/database");
 
-const port = process.env.DB_PORT || 3000;
+const port = 3000;
 
 app.listen(port, () => {
   console.log(`Server running on port ${port}`);
