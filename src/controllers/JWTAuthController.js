@@ -35,6 +35,13 @@ const login = async (req, res) => {
         const accessToken = jwt.sign({ userId: user.id }, process.env.ACCESS_TOKEN_SECRET, { expiresIn: '15m' });
         const refreshToken = jwt.sign({ userId: user.id }, process.env.REFRESH_TOKEN_SECRET, { expiresIn: '7d' });
 
+        res.cookie('accessToken', accessToken, {
+            httpOnly: true,
+            secure: false,
+            sameSite: 'strict',
+            maxAge: 15 * 60 * 1000
+        });
+
         res.cookie('refreshToken', refreshToken, {
             httpOnly: true,
             secure: false,
@@ -56,7 +63,14 @@ const refresh = (req, res) => {
         if (err) return res.status(403).json({ error: "Error: Refresh token expired or invalid" });
 
         const newAccessToken = jwt.sign({ userId: decoded.userId }, process.env.ACCESS_TOKEN_SECRET, { expiresIn: '15m' });
-        return res.status(200).json({ accessToken: newAccessToken });
+        
+        res.cookie('accessToken', newAccessToken, {
+            httpOnly: true,
+            secure: false,
+            sameSite: 'strict',
+            maxAge: 15 * 60 * 1000
+        });
+        return res.status(200).json({ message: "Token refreshed successfully"});
     });
 };
 
