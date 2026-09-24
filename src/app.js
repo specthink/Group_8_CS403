@@ -3,11 +3,13 @@ const cookieParser = require("cookie-parser");
 const swaggerJsdoc = require('swagger-jsdoc');
 const swaggerUi = require('swagger-ui-express');
 const authRoutes = require("./routes/JWTAuthRoutes");
+const gameRoutes = require("./routes/gameRoutes");
 
 const app = express();
 app.use(express.json());
 app.use(cookieParser());
 app.use("/auth", authRoutes);
+app.use("/games", gameRoutes);
 
 const swaggerOption = {
     definition: {
