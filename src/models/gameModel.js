@@ -1,7 +1,7 @@
 const games = [
-  { id: 1, title: "The Witcher 3", genre: "RPG", platform: "PC" },
-  { id: 2, title: "Elden Ring", genre: "Action RPG", platform: "PlayStation 5" },
-  { id: 3, title: "Hades", genre: "Roguelike", platform: "Nintendo Switch" }
+  { id: 1, title: "Wuthering Waves", genre: "RPG", platform: "PC/Mobile" },
+  { id: 2, title: "Punishing: Gray Ravens", genre: "Action RPG", platform: "PC/Mobile" },
+  { id: 3, title: "Valorant", genre: "FPS", platform: "PC" }
 ];
 
 let nextId = games.length + 1;
