@@ -77,6 +77,8 @@ router.post("/login", authController.login);
  *  post:
  *      summary: Verify the refresh token cookie and issue a new access token cookie
  *      tags: [Authentication]
+ *      security:
+ *        - bearerAuth: []
  *      responses:
  *          200:
  *              description: Token refreshed successfully
